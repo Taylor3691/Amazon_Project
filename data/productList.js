@@ -1,6 +1,5 @@
 
 let htmlElement = ``;
-
 products.forEach((item)=>{
     
     htmlElement += `<div class="product-container">
@@ -47,10 +46,37 @@ products.forEach((item)=>{
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary add-interactive" data-product-name ="${item.id}">
             Add to Cart
           </button>
         </div>`
 });
         
 document.querySelector('.js-product-list').innerHTML = htmlElement;
+document.querySelectorAll('.add-interactive').forEach((button)=>{
+    button.addEventListener('click', ()=>{
+        let check;
+        const productName = button.dataset.productName;
+        cart.forEach((item)=>{
+            if(item.id === productName){
+                check = item;
+            }
+        });
+
+        if(check){
+            check.quantity+=1;
+        }else{
+            cart.push({
+                id: productName,
+                quantity: 1
+            });
+        }
+
+        let total = 0;
+        cart.forEach((item)=>{
+            total += item.quantity;
+        })
+        document.querySelector('.cart-quantity').innerHTML = total;
+    });
+});
+
