@@ -1,4 +1,5 @@
-import { cart, addToCart, updateCart } from "./carts.js";
+import { cart, addToCart, updateCart} from "./carts.js";
+import { convertMoney } from "./utils/money.js";
 import { products } from "./products.js";
 
 let htmlElement = ``;
@@ -23,7 +24,7 @@ products.forEach((item)=>{
           </div>
 
           <div class="product-price">
-            $${(item.priceCents/100).toFixed(2)}
+            $${convertMoney(item.priceCents)}
           </div>
 
           <div class="product-quantity-container">
