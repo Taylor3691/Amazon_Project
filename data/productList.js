@@ -1,3 +1,5 @@
+import { cart } from "./carts.js";
+import { products } from "./products.js";
 
 let htmlElement = ``;
 products.forEach((item)=>{
