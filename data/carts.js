@@ -1,3 +1,5 @@
+import { products } from "./products.js";
+
 export let cart = JSON.parse(localStorage.getItem('listCart')) || [];
 
 export function  addToCart(button){
@@ -8,13 +10,20 @@ export function  addToCart(button){
             check = item;
         }
     });
-
+    let price;
+    products.forEach((item)=>{
+        if(item.id === productName){
+            price = item.priceCents;
+        }
+    });
     if(check){
         check.quantity+=1;
     }else{
         cart.push({
             id: productName,
-            quantity: 1
+            quantity: 1,
+            priceCents: price,
+            option: 3
         });
     }
     saveCartLocalStorage();
@@ -43,4 +52,23 @@ export function removeFromtCart(productId){
     updateCart();
     saveCartLocalStorage();
     console.log(cart);
+}
+
+export function updateCartOption(itemId, optionId){
+    let matchingProdcut;
+    cart.forEach((product)=>{
+        if(product.id===itemId){
+            matchingProdcut = product;
+        }
+    });
+    matchingProdcut.option = optionId;
+    saveCartLocalStorage();
+}
+
+export function sumOfCart(){
+    let total = 0;
+    cart.forEach((item)=>{
+        total+=item.quantity;
+    });
+    return total;
 }

@@ -1,10 +1,9 @@
-import { cart, addToCart, updateCart} from "./carts.js";
+import { cart, addToCart, updateCart, sumOfCart} from "./carts.js";
 import { convertMoney } from "./utils/money.js";
 import { products } from "./products.js";
 
 let htmlElement = ``;
 products.forEach((item)=>{
-    
     htmlElement += `<div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -62,4 +61,5 @@ document.querySelectorAll('.add-interactive').forEach((button)=>{
         updateCart();
     });
 });
+document.querySelector('.js-quantity').innerHTML = sumOfCart();
 
